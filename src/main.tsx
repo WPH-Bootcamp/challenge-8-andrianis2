@@ -1,3 +1,5 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -12,6 +14,7 @@ const queryClient = new QueryClient({
     queries: {
       // TODO: Configure default query options
       // Examples: refetchOnWindowFocus, retry, staleTime, etc.
+      staleTime: Infinity,
     },
   },
 });

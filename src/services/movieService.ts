@@ -1,21 +1,41 @@
 import api from '@/lib/axios';
-// import { Movie, MovieResponse } from '@/types/movie';
-
-// TODO: Create service functions to fetch data from TMDB API
-// Reference: https://developer.themoviedb.org/reference/intro/getting-started
+import type { Movie, MovieResponse } from '@/types/movie';
 
 export const movieService = {
-  // TODO: Implement getPopularMovies function
-  // Endpoint: GET /movie/popular
+  // GET /movie/popular
+  async getPopularMovies(page = 1): Promise<MovieResponse> {
+    const response = await api.get<MovieResponse>('/movie/popular', {
+      params: { page },
+    });
 
-  // TODO: Implement getNowPlayingMovies function
-  // Endpoint: GET /movie/now_playing
+    return response.data;
+  },
 
-  // TODO: Implement getMovieDetails function
-  // Endpoint: GET /movie/{movie_id}
+  // GET /movie/now_playing
+  async getNowPlayingMovies(page = 1): Promise<MovieResponse> {
+    const response = await api.get<MovieResponse>('/movie/now_playing', {
+      params: { page },
+    });
 
-  // TODO: Implement searchMovies function
-  // Endpoint: GET /search/movie
+    return response.data;
+  },
 
-  // TODO: Add more endpoints as needed
+  // GET /movie/{movie_id}
+  async getMovieDetails(movieId: number): Promise<Movie> {
+    const response = await api.get<Movie>(`/movie/${movieId}`);
+
+    return response.data;
+  },
+
+  // GET /search/movie
+  async searchMovies(query: string, page = 1): Promise<MovieResponse> {
+    const response = await api.get<MovieResponse>('/search/movie', {
+      params: {
+        query,
+        page,
+      },
+    });
+
+    return response.data;
+  },
 };

@@ -8,6 +8,13 @@ interface MovieStore {
 
   // TODO: Add action methods
   // Examples: addToFavorites, removeFromFavorites, etc.
+
+  searchQuery: string;
+  selectedGenre: number | null;
+
+  setSearchQuery: (query: string) => void;
+  setSelectedGenre: (genreId: number | null) => void;
+  clearFilter: () => void;
 }
 
 // TODO: Create Zustand store
@@ -15,4 +22,16 @@ interface MovieStore {
 
 export const useMovieStore = create<MovieStore>((set) => ({
   // TODO: Initialize state and implement actions
+  searchQuery: '',
+  selectedGenre: null,
+
+  setSearchQuery: (query) => set({ searchQuery: query }),
+
+  setSelectedGenre: (genreId) => set({ selectedGenre: genreId }),
+
+  clearFilter: () =>
+    set({
+      searchQuery: '',
+      selectedGenre: null,
+    }),
 }));
